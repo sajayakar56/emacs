@@ -40,6 +40,12 @@ class PokemonGenerator {
         }
         return pokemonArray
     }
-    
-    
+    static func searchName(array: [Pokemon], name: String) -> Pokemon? {
+        for pokemon in array {
+            if pokemon.name == name {
+                return pokemon
+            }
+        }
+    return nil
+    }
 }
