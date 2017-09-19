@@ -52,4 +52,7 @@ class Pokemon {
         self.imageUrl = "http://img.pokemondb.net/artwork/\(name.components(separatedBy: " ")[0].lowercased()).jpg"
     }
     
+    func toString() -> String {
+        return name + " #" + String(number)
+    }
 }
