@@ -10,18 +10,24 @@
 import UIKit
 
 class ViewController: UIViewController {
+    var searchBar: UISearchBar!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         setupUI();
         let pdb = PDB()
-        print(pdb.searchNumber(number: 1)!.name)
     }
 
     func setupUI() {
         let VFH = view.frame.height;
         let VFW = view.frame.width;
+        searchBar = UISearchBar(frame: CGRect(x: 0,
+                                              y: 10,
+                                              width: VFW,
+                                              height: 50))
+        searchBar.placeholder = "Search Pokédex..."
         
+        view.addSubview(searchBar)
     }
     
     override func didReceiveMemoryWarning() {
