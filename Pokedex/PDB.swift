@@ -10,8 +10,18 @@ import Foundation
 
 class PDB {
     var pokemon_array: [Pokemon]
+    var types: [String] = ["normal", "fire", "water",
+                           "grass", "electric", "ice",
+                           "ground", "flying", "poison",
+                           "fighting", "psychic", "dark",
+                           "rock", "bug", "ghost",
+                           "steel", "dragon", "fairy"]
     init() {
         pokemon_array = PokemonGenerator.getPokemonArray()
+    }
+    
+    func listTypes() -> [String] {
+        return self.types
     }
 
     // Linear time
@@ -82,7 +92,7 @@ class PDB {
         var randoms: [Int] = []
         var ret_list: [Pokemon] = []
         // Generating random indexes and appending to list 1/2 operations
-        for i in 0..<number {
+        for _ in 0..<number {
             var rand = Int(arc4random_uniform(UInt32(pokemon_array.count)))
             while randoms.contains(rand) {
                 rand = Int(arc4random_uniform(UInt32(pokemon_array.count)))

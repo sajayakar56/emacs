@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class Pokemon {
     
@@ -54,5 +55,17 @@ class Pokemon {
     
     func toString() -> String {
         return name + " #" + String(number)
+    }
+    
+    func getImage() -> UIImage {
+        // from stackoverflow #24231680
+        let url = URL(string: self.imageUrl)
+        let data = try? Data(contentsOf: url!)
+        if let x = data {
+            return UIImage(data: x)!
+        } else {
+            return UIImage()
+        }
+        // can cause bugs, should add null check
     }
 }

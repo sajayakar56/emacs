@@ -12,9 +12,9 @@ import UIKit
 class ViewController: UIViewController, UISearchBarDelegate {
     var searchBar: UISearchBar!
     
-    var pokemon: [Pokemon]! //array of pokemon search results
+    var pokemon: [Pokemon] = [] //array of pokemon search results
     
-    var pokemonToPass: Pokemon!
+    var pokemonToPass: Pokemon?
     
     var tableView: UITableView! //tableView for displaying search results
     
@@ -25,7 +25,6 @@ class ViewController: UIViewController, UISearchBarDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         setupUI();
-        pdb = PDB()
     }
 
     func setupUI() {
@@ -80,7 +79,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToPokemonVC" {
             let pokemonVC = segue.destination as! PokemonViewController
-            pokemonVC.pokemon = pokemonToPass
+            pokemonVC.pokemon = pokemonToPass!
         }
     }
     
