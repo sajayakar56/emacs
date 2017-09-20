@@ -97,9 +97,11 @@ class ViewController: UIViewController, UISearchBarDelegate {
             if let x = result {
                 pokemonToPass = x
                 performSegue(withIdentifier: "segueToPokemonVC", sender: self)
-            } else {
-                print("search pokemon failed!")
+                return
             }
+            let alert = UIAlertController(title: "Error", message: "Please enter valid pokemon name.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
         if selectedMode == "Number" {
             var result: Pokemon?
@@ -111,13 +113,21 @@ class ViewController: UIViewController, UISearchBarDelegate {
                     return
                 }
             }
-            print("error happened")
+            let alert = UIAlertController(title: "Error", message: "Please enter valid pokemon number.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
     func changeButtonMode() {
         modeButton.setTitle(selectedMode, for: .normal)
         self.pickerView.removeFromSuperview()
+        /*if selectedMode == "Number" {
+            searchBar.keyboardType = .numberPad
+        }
+        else {
+            searchBar.keyboardType = .default
+        }*/
     }
 }
 
