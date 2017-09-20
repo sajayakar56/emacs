@@ -9,6 +9,7 @@
 import UIKit
 
 class PokemonTableViewCell: UITableViewCell {
+    
     var nameLabel: UILabel!   //Pokemon Name Label
     
     override func awakeFromNib() {
