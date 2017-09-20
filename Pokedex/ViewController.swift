@@ -17,9 +17,9 @@ class ViewController: UIViewController, UISearchBarDelegate {
     
     var modeButton: UIButton!
     var pdb: PDB = PDB()
-    
+    var pokemonToPass: Pokemon?
     var pickerView: UIPickerView = UIPickerView() //pickervew to select a mode
-    var modeArray: [String] = ["Type", "Minimum Attack Points", "Minimum Defense Points", "Minimum Health Points"]
+    var modeArray: [String] = ["Name", "Number", "Type", "Minimum Attack Points", "Minimum Defense Points", "Minimum Health Points"]
     var selectedMode: String!
     
     override func viewDidLoad() {
@@ -85,14 +85,33 @@ class ViewController: UIViewController, UISearchBarDelegate {
             let searchVC = segue.destination as! SearchResultsViewController
             searchVC.pokemonList = [] //pass in search results array eventually
         }
+        if segue.identifier == "segueToPokemonVC" {
+            let pokemonVC = segue.destination as! PokemonViewController
+            pokemonVC.pokemon = pokemonToPass
+        }
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        let result: Pokemon? = pdb.searchName(name: searchBar.text!)
-        if let x = result {
-            print(x.toString())
-        } else {
-            print("search pokemon failed!")
+        if selectedMode == "Name" {
+            let result: Pokemon? = pdb.searchName(name: searchBar.text!)
+            if let x = result {
+                pokemonToPass = x
+                performSegue(withIdentifier: "segueToPokemonVC", sender: self)
+            } else {
+                print("search pokemon failed!")
+            }
+        }
+        if selectedMode == "Number" {
+            var result: Pokemon?
+            if let number = Int(searchBar.text!) {
+                result = pdb.searchNumber(number: number)
+                if let x = result {
+                    pokemonToPass = x
+                    performSegue(withIdentifier: "segueToPokemonVC", sender: self)
+                    return
+                }
+            }
+            print("error happened")
         }
     }
     
@@ -100,7 +119,6 @@ class ViewController: UIViewController, UISearchBarDelegate {
         modeButton.setTitle(selectedMode, for: .normal)
         self.pickerView.removeFromSuperview()
     }
-    
 }
 
 extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {

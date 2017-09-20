@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="pXz-yG-n9Y">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -23,11 +23,13 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
-                        <segue destination="pXz-yG-n9Y" kind="show" identifier="segueToPokemonVC" id="g4T-zo-NF0"/>
+                        <segue destination="pXz-yG-n9Y" kind="show" identifier="segueToSearchVC" id="g4T-zo-NF0"/>
+                        <segue destination="EAn-24-ZOH" kind="show" identifier="segueToPokemonVC" id="wkm-2d-v3k"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-522" y="256"/>
         </scene>
         <!--Search Results View Controller-->
         <scene sceneID="lKw-6N-gY9">
@@ -46,6 +48,27 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RQu-70-lh5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="718" y="37"/>
+        </scene>
+        <!--Pokemon View Controller-->
+        <scene sceneID="ibp-Sa-QIe">
+            <objects>
+                <viewController id="EAn-24-ZOH" customClass="PokemonViewController" customModule="Pokedex" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="39W-AI-bok"/>
+                        <viewControllerLayoutGuide type="bottom" id="JzO-B7-aW8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UHA-0R-9kz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="toMainVC" id="byG-MN-JLs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="v3i-Gx-LGo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="718" y="741"/>
         </scene>
     </scenes>
 </document>

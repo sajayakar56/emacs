@@ -10,7 +10,6 @@ import UIKit
 
 class PokemonViewController: UIViewController {
     // remove this shit
-    var pdb: PDB = PDB()
     var pokemon: Pokemon!
     // var pokemon: Pokemon!
     var pokemonImage: UIImageView!
@@ -18,18 +17,27 @@ class PokemonViewController: UIViewController {
     var pokemonType: UIImageView!
     // change from text view to table view
     var pokemonStats: UITextView!
+    var backButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         // remove this
-        pokemon = pdb.searchName(name: "Pikachu")!
         setupUI()
     }
 
     func setupUI() {
         let VFW = view.frame.width
         let VFH = view.frame.height
+        // adding the back button
+        backButton = UIButton(frame: CGRect(x: 20, y: 20, width: 40, height: 40))
+        backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        backButton.setTitle("👈", for: .normal)
+        backButton.setTitleColor(UIColor.black, for: .normal)
+        backButton.layer.cornerRadius = 8
+        backButton.backgroundColor = UIColor.purple
+        view.addSubview(backButton)
+        
         // adding the pokemon image
         pokemonImage = UIImageView(frame: CGRect(x: VFW * 0.1, y: VFH * 0.1, width: 40, height: 40))
         pokemonImage.image = pokemon.getImage()
@@ -63,6 +71,10 @@ class PokemonViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func goBack() {
+        self.performSegue(withIdentifier: "toMainVC", sender: self)
     }
     
     /*
