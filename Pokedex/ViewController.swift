@@ -9,9 +9,9 @@
 // The Starting Screen / Opening screen
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UISearchBarDelegate {
     var searchBar: UISearchBar!
-    var pdb: PDB! //pokemon database
+    
     var pokemon: [Pokemon]! //array of pokemon search results
     
     var pokemonToPass: Pokemon!
@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     var tableView: UITableView! //tableView for displaying search results
     
     var modeButton: UIButton!
+    var pdb: PDB = PDB()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +36,7 @@ class ViewController: UIViewController {
                                               width: VFW,
                                               height: 50))
         searchBar.placeholder = "Search Pokédex..."
+        searchBar.delegate = self
         view.addSubview(searchBar)
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
@@ -82,6 +84,14 @@ class ViewController: UIViewController {
         }
     }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        var result: Pokemon? = pdb.searchName(name: searchBar.text!)
+        if let x = result {
+            print(x.toString())
+        } else {
+            print("search pokemon failed!")
+        }
+    }
 }
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
