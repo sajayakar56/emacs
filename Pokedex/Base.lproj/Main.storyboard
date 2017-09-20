@@ -29,10 +29,10 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
-        <!--Pokemon View Controller-->
+        <!--Search Results View Controller-->
         <scene sceneID="lKw-6N-gY9">
             <objects>
-                <viewController id="pXz-yG-n9Y" customClass="PokemonViewController" customModule="Pokedex" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="pXz-yG-n9Y" customClass="SearchResultsViewController" customModule="Pokedex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wpr-Ee-g5S"/>
                         <viewControllerLayoutGuide type="bottom" id="O5Z-Kk-qsI"/>
@@ -45,7 +45,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RQu-70-lh5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="630" y="104"/>
+            <point key="canvasLocation" x="718" y="37"/>
         </scene>
     </scenes>
 </document>

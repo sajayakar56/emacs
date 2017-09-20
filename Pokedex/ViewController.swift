@@ -7,19 +7,20 @@
 //
 
 // The Starting Screen / Opening screen
+
+// TODO: Filter search results based on mode.
+
 import UIKit
 
 class ViewController: UIViewController, UISearchBarDelegate {
     var searchBar: UISearchBar!
     
-    var pokemon: [Pokemon] = [] //array of pokemon search results
-    
-    var pokemonToPass: Pokemon?
-    
-    var tableView: UITableView! //tableView for displaying search results
-    
     var modeButton: UIButton!
     var pdb: PDB = PDB()
+    
+    var pickerView: UIPickerView = UIPickerView() //pickervew to select a mode
+    var modeArray: [String] = ["Type", "Minimum Attack Points", "Minimum Defense Points", "Minimum Health Points"]
+    var selectedMode: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,10 +31,10 @@ class ViewController: UIViewController, UISearchBarDelegate {
     func setupUI() {
         let VFH = view.frame.height
         let VFW = view.frame.width
-        searchBar = UISearchBar(frame: CGRect(x: 0,
-                                              y: 20,
-                                              width: VFW,
-                                              height: 50))
+        searchBar = UISearchBar(frame: CGRect(x: VFW * 0.1,
+                                              y: VFH * 0.3,
+                                              width: VFW * 0.8,
+                                              height: 100))
         searchBar.placeholder = "Search Pokédex..."
         searchBar.delegate = self
         view.addSubview(searchBar)
@@ -41,15 +42,15 @@ class ViewController: UIViewController, UISearchBarDelegate {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
         
-        /*modeButton = UIButton(frame: CGRect(x: 15, y: 20, width: 100, height: 40))
-        modeButton.setTitle("Start", for: .normal)
+        modeButton = UIButton(frame: CGRect(x: VFW/2 - 150, y: searchBar.frame.maxY + 20, width: 300, height: 60))
+        modeButton.setTitle("Select Mode", for: .normal)
         modeButton.setTitleColor(UIColor.white, for: .normal)
-        modeButton.backgroundColor = UIColor(red: 0, green: 153/255, blue: 51/255, alpha: 0.95)
+        modeButton.backgroundColor = UIColor.red
         modeButton.layer.cornerRadius = 8
-        modeButton.addTarget(self, action: #selector(toggleButton), for: .touchUpInside)
-        view.addSubview(modeButton)*/
+        modeButton.addTarget(self, action: #selector(togglePickerView), for: .touchUpInside)
+        view.addSubview(modeButton)
         
-        setupTableView()
+        setupPickerView()
     }
     
     override func didReceiveMemoryWarning() {
@@ -62,66 +63,80 @@ class ViewController: UIViewController, UISearchBarDelegate {
         self.searchBar.endEditing(true)
     }
     
-    func setupTableView(){
-        //Initialize TableView Object here
-        tableView = UITableView(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.maxY + view.frame.height * 0.1 + 10, width: view.frame.width, height: view.frame.height - UIApplication.shared.statusBarFrame.maxY))
-        //Register the tableViewCell you are using
-        tableView.register(PokemonTableViewCell.self, forCellReuseIdentifier: "tableViewCell")
-        
-        //Set properties of TableView
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50/2, right: 0)
-        //Add tableView to view
-        view.addSubview(tableView)
+    func togglePickerView() {
+        if !self.pickerView.isDescendant(of: view) {
+            view.addSubview(self.pickerView)
+            view.bringSubview(toFront: self.pickerView)
+        }
+        else {
+            self.pickerView.removeFromSuperview()
+        }
+    }
+    
+    func setupPickerView() {
+        self.pickerView.dataSource = self
+        self.pickerView.delegate = self
+        self.pickerView.frame = CGRect(x: 0, y: modeButton.frame.maxY + 5, width: view.frame.width, height: 200)
+        self.pickerView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "segueToPokemonVC" {
-            let pokemonVC = segue.destination as! PokemonViewController
-            pokemonVC.pokemon = pokemonToPass!
+        if segue.identifier == "segueToSearchVC" {
+            let searchVC = segue.destination as! SearchResultsViewController
+            searchVC.pokemonList = [] //pass in search results array eventually
         }
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        var result: Pokemon? = pdb.searchName(name: searchBar.text!)
+        let result: Pokemon? = pdb.searchName(name: searchBar.text!)
         if let x = result {
             print(x.toString())
         } else {
             print("search pokemon failed!")
         }
     }
+    
+    func changeButtonMode() {
+        modeButton.setTitle(selectedMode, for: .normal)
+        self.pickerView.removeFromSuperview()
+    }
+    
 }
 
-extension ViewController: UITableViewDataSource, UITableViewDelegate {
+extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return pokemon.count
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return modeArray.count
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell") as! PokemonTableViewCell
+
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         
-        for subview in cell.contentView.subviews{
-            subview.removeFromSuperview()
-        }
+        var pickerLabel: UILabel = UILabel()
+        pickerLabel.text = modeArray[row]
+        pickerLabel.textColor = UIColor.black
+        pickerLabel.textAlignment = .center
+        pickerLabel.sizeToFit()
+        pickerLabel.numberOfLines = 0
         
-        cell.awakeFromNib()
-        cell.nameLabel.text = pokemon[indexPath.row].name
-        return cell
+        return pickerLabel
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        pokemonToPass = pokemon[indexPath.row]
-        performSegue(withIdentifier: "segueToPokemonVC", sender: self)
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selectedMode = modeArray[row]
+        changeButtonMode()
+        //call segue eventually
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+
+    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+        return 36.0
+    }
+
+    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
+        return 36.0
     }
     
 }
