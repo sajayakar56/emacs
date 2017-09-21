@@ -24,12 +24,12 @@
                     </view>
                     <connections>
                         <segue destination="pXz-yG-n9Y" kind="show" identifier="segueToSearchVC" id="g4T-zo-NF0"/>
-                        <segue destination="EAn-24-ZOH" kind="presentation" identifier="segueToPokemonVC" modalTransitionStyle="partialCurl" id="wkm-2d-v3k"/>
+                        <segue destination="EAn-24-ZOH" kind="show" identifier="segueToPokemonVC" id="wkm-2d-v3k"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-810" y="482"/>
+            <point key="canvasLocation" x="-522" y="256"/>
         </scene>
         <!--Search Results View Controller-->
         <scene sceneID="lKw-6N-gY9">
@@ -67,12 +67,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-<<<<<<< HEAD
                         <segue destination="BYZ-38-t0r" kind="show" identifier="toMainVC" id="byG-MN-JLs"/>
                         <segue destination="pXz-yG-n9Y" kind="show" identifier="segueToSearch" id="9VH-CL-7ml"/>
-=======
-                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="toMainVC" modalTransitionStyle="crossDissolve" id="byG-MN-JLs"/>
->>>>>>> 7692c78520bdfeb0538ff253edf28e9f29c23987
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v3i-Gx-LGo" userLabel="First Responder" sceneMemberID="firstResponder"/>
