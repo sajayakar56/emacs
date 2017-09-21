@@ -114,6 +114,12 @@ class ViewController: UIViewController {
             typeSelectorToSearchBar()
         }
         self.pickerView.removeFromSuperview()
+        /*if selectedMode == "Number" {
+            searchBar.keyboardType = .numberPad
+        }
+        else {
+            searchBar.keyboardType = .default
+        }*/
     }
     
     func searchBarToTypeSelector() {
@@ -226,7 +232,7 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource, UICollec
                 pokemonToPass = x
                 performSegue(withIdentifier: "segueToPokemonVC", sender: self)
             } else {
-                print("search pokemon failed!")
+                warning(message: "Please enter valid pokemon name.")
             }
         }
         if selectedMode == "Number" {
@@ -239,7 +245,7 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource, UICollec
                     return
                 }
             }
-            print("error happened")
+            warning(message: "Please enter valid pokemon number.")
         }
         if selectedMode == "Minimum Attack Points" {
             print("NOT IMPLEMENTED")
@@ -250,5 +256,11 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource, UICollec
         if selectedMode == "Minimum Health Points" {
             print("NOT IMPLEMENTED")
         }
+    }
+    
+    func warning(message: String) {
+        let alert  = UIAlertController(title: "Error", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }
