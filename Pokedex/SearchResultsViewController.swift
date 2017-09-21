@@ -117,7 +117,7 @@ class SearchResultsViewController: UIViewController {
         if segue.identifier == "segueToPokemonVC" {
             let pokemonVC = segue.destination as! PokemonViewController
             pokemonVC.originScreen = 2
-            pokemonVC.pokemon = pokemonToPass
+            PokemonViewController.pokemon = pokemonToPass
         }
     }
     
@@ -175,6 +175,8 @@ extension SearchResultsViewController: UICollectionViewDataSource, UICollectionV
         
         cell.awakeFromNib()
         cell.pokemonImage.image = SearchResultsViewController.pokemonList[indexPath.row]?.getImage()
+        
+        //change size of image to make them uniform
         let hasAlpha = true
         let scale: CGFloat = 0.0 // Use scale factor of main screen
         
@@ -185,11 +187,12 @@ extension SearchResultsViewController: UICollectionViewDataSource, UICollectionV
         
         cell.pokemonImage.image = scaledImage
         
+        //bold the label text
         let boldedText  = SearchResultsViewController.pokemonList[indexPath.row]?.name
         let attris = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 12)]
         let attributed = NSMutableAttributedString(string:boldedText!, attributes:attris)
-
         cell.pokemonName.attributedText = attributed
+        
         return cell
     }
     

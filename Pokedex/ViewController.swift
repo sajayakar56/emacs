@@ -105,7 +105,7 @@ class ViewController: UIViewController {
         }
         if segue.identifier == "segueToPokemonVC" {
             let pokemonVC = segue.destination as! PokemonViewController
-            pokemonVC.pokemon = pokemonToPass
+            PokemonViewController.pokemon = pokemonToPass
             pokemonVC.originScreen = 1
         }
     }
