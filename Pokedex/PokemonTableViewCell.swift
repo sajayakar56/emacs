@@ -16,7 +16,7 @@ class PokemonTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         //Setting up Name Label
-        nameLabel = UILabel(frame: CGRect(x: 20, y: contentView.frame.height * (1/4), width: 150, height: contentView.frame.height * (1/2)))
+        nameLabel = UILabel(frame: CGRect(x: 20, y: contentView.frame.height * (1/4), width: contentView.frame.width, height: contentView.frame.height * (1/2)))
         nameLabel.textColor = UIColor.black
         contentView.addSubview(nameLabel)
         

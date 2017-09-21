@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -44,6 +44,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <segue destination="EAn-24-ZOH" kind="show" identifier="segueToPokemonVC" id="mdr-5D-8C8"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="segueToMain" id="cKZ-mB-W9t"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RQu-70-lh5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -64,6 +68,7 @@
                     </view>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="toMainVC" id="byG-MN-JLs"/>
+                        <segue destination="pXz-yG-n9Y" kind="show" identifier="segueToSearch" id="9VH-CL-7ml"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v3i-Gx-LGo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -71,4 +76,9 @@
             <point key="canvasLocation" x="718" y="741"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="cKZ-mB-W9t"/>
+        <segue reference="g4T-zo-NF0"/>
+        <segue reference="mdr-5D-8C8"/>
+    </inferredMetricsTieBreakers>
 </document>

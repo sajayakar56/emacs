@@ -14,6 +14,8 @@ class PokemonViewController: UIViewController {
     
     var backButton: UIButton!
     
+    var originScreen = 0 //1 for main vc and 2 for search vc
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -152,7 +154,12 @@ class PokemonViewController: UIViewController {
     }
     
     func goBack() {
-        self.performSegue(withIdentifier: "toMainVC", sender: self)
+        if originScreen == 1 {
+            self.performSegue(withIdentifier: "toMainVC", sender: self)
+        }
+        else {
+            self.performSegue(withIdentifier: "segueToSearch", sender: self)
+        }
     }
     
     /*

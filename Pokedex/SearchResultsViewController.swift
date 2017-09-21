@@ -10,13 +10,15 @@ import UIKit
 
 class SearchResultsViewController: UIViewController {
     
-    var pokemonList: [Pokemon] = [] //list containing pokemons returned from search
+    static var pokemonList: [Pokemon?] = [] //list containing pokemons returned from search
     
     var segmentedControl: UISegmentedControl!   //What we will use to switch between the table and collection views
     var collectionView: UICollectionView!   //collectionView for displaying search results in image form
     var tableView: UITableView! //tableView for displaying search results in text form
     
     var pokemonToPass: Pokemon! //selected pokemon to pass to the page displaying pokemon info
+    
+    var backButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +32,17 @@ class SearchResultsViewController: UIViewController {
     }
     
     func setupSegmentedControl() {
+        //create back button
+        backButton = UIButton(frame: CGRect(x: 20, y: 25, width: 60, height: 40))
+        backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        backButton.setTitle("Back", for: .normal)
+        backButton.setTitleColor(UIColor.white, for: .normal)
+        backButton.layer.cornerRadius = 8
+        backButton.backgroundColor = UIColor.red
+        view.addSubview(backButton)
+        
         //Initialize SegmentedControl
-        segmentedControl = UISegmentedControl(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.maxY + 5, width: view.frame.width, height: view.frame.height * 0.05))
+        segmentedControl = UISegmentedControl(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.maxY + 50, width: view.frame.width, height: view.frame.height * 0.05))
         segmentedControl.insertSegment(withTitle: "TableView", at: 0, animated: true)
         segmentedControl.insertSegment(withTitle: "CollectionView", at: 1, animated: true)
         segmentedControl.layer.cornerRadius = 3
@@ -40,6 +51,14 @@ class SearchResultsViewController: UIViewController {
     }
     
     func setupTableView(){
+        backButton = UIButton(frame: CGRect(x: 20, y: 25, width: 60, height: 40))
+        backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        backButton.setTitle("Back", for: .normal)
+        backButton.setTitleColor(UIColor.white, for: .normal)
+        backButton.layer.cornerRadius = 8
+        backButton.backgroundColor = UIColor.red
+        view.addSubview(backButton)
+        
         //start off with table view in segmented control
         segmentedControl.selectedSegmentIndex = 0
         
@@ -57,6 +76,14 @@ class SearchResultsViewController: UIViewController {
     }
 
     func setupCollectionView() {
+        backButton = UIButton(frame: CGRect(x: 20, y: 25, width: 60, height: 40))
+        backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        backButton.setTitle("Back", for: .normal)
+        backButton.setTitleColor(UIColor.white, for: .normal)
+        backButton.layer.cornerRadius = 8
+        backButton.backgroundColor = UIColor.red
+        view.addSubview(backButton)
+        
         segmentedControl.selectedSegmentIndex = 1
         
         let layout = UICollectionViewFlowLayout()
@@ -82,9 +109,14 @@ class SearchResultsViewController: UIViewController {
         }
     }
     
+    func goBack() {
+        self.performSegue(withIdentifier: "segueToMain", sender: self)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToPokemonVC" {
             let pokemonVC = segue.destination as! PokemonViewController
+            pokemonVC.originScreen = 2
             pokemonVC.pokemon = pokemonToPass
         }
     }
@@ -98,7 +130,7 @@ extension SearchResultsViewController: UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return pokemonList.count
+        return SearchResultsViewController.pokemonList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -109,12 +141,12 @@ extension SearchResultsViewController: UITableViewDataSource, UITableViewDelegat
         }
         
         cell.awakeFromNib()
-        cell.nameLabel.text = pokemonList[indexPath.row].name
+        cell.nameLabel.text = SearchResultsViewController.pokemonList[indexPath.row]?.name
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        pokemonToPass = pokemonList[indexPath.row]
+        pokemonToPass = SearchResultsViewController.pokemonList[indexPath.row]
         performSegue(withIdentifier: "segueToPokemonVC", sender: self)
     }
     
@@ -131,18 +163,23 @@ extension SearchResultsViewController: UICollectionViewDataSource, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return pokemonList.count
+        return SearchResultsViewController.pokemonList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewCell", for: indexPath) as! PokemonCollectionViewCell
+        
+        for subview in cell.contentView.subviews{
+            subview.removeFromSuperview()
+        }
+        
         cell.awakeFromNib()
-        //cell.pokemonImage.image = pokemonList[indexPath.row].getImage()
+        cell.pokemonImage.image = SearchResultsViewController.pokemonList[indexPath.row]?.getImage()
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        pokemonToPass = pokemonList[indexPath.row]
+        pokemonToPass = SearchResultsViewController.pokemonList[indexPath.row]
         performSegue(withIdentifier: "segueToPokemonVC", sender: self)
     }
     

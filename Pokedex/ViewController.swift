@@ -19,7 +19,10 @@ class ViewController: UIViewController {
     var backgroundImage: UIImageView!
     var modeButton: UIButton!
     var pdb: PDB = PDB()
+    
     var pokemonToPass: Pokemon?
+    var pokemonSearch: [Pokemon?] = []
+    
     var pickerView: UIPickerView = UIPickerView() //pickervew to select a mode
     var modeArray: [String] = ["Name", "Number", "Type", "Minimum Attack Points", "Minimum Defense Points", "Minimum Health Points"]
     var selectedMode: String!
@@ -94,12 +97,12 @@ class ViewController: UIViewController {
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToSearchVC" {
-            let searchVC = segue.destination as! SearchResultsViewController
-            searchVC.pokemonList = [] //pass in search results array eventually
+            SearchResultsViewController.pokemonList = pokemonSearch //pass in search results array
         }
         if segue.identifier == "segueToPokemonVC" {
             let pokemonVC = segue.destination as! PokemonViewController
             pokemonVC.pokemon = pokemonToPass
+            pokemonVC.originScreen = 1
         }
     }
 
@@ -114,7 +117,7 @@ class ViewController: UIViewController {
         } else if searchBar.isHidden {
             typeSelectorToSearchBar()
         }
-        else if selectedMode == "Number" {
+        else if selectedMode == "Number" || selectedMode == "Minimum Health Points" || selectedMode == "Minimum Defense Points" || selectedMode == "Minimum Attack Points" {
             searchBar.keyboardType = .numberPad
         }
         self.pickerView.removeFromSuperview()
@@ -246,13 +249,46 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource, UICollec
             warning(message: "Please enter valid pokemon number.")
         }
         if selectedMode == "Minimum Attack Points" {
-            print("NOT IMPLEMENTED")
+            var result: [Pokemon?] = []
+            if let number = Int(searchBar.text!) {
+                result = pdb.searchMinATK(number: number)
+                pokemonSearch = result
+                if result.count == 0 {
+                    warning(message: "No search results.")
+                    return
+                }
+                performSegue(withIdentifier: "segueToSearchVC", sender: self)
+                return
+            }
+            warning(message: "Please enter valid pokemon number.")
         }
         if selectedMode == "Minimum Defense Points" {
-            print("NOT IMPLEMENTED")
+            var result: [Pokemon?] = []
+            if let number = Int(searchBar.text!) {
+                result = pdb.searchMinDEF(number: number)
+                pokemonSearch = result
+                if result.count == 0 {
+                    warning(message: "No search results.")
+                    return
+                }
+                performSegue(withIdentifier: "segueToSearchVC", sender: self)
+                return
+            }
+            warning(message: "Please enter valid pokemon number.")
         }
         if selectedMode == "Minimum Health Points" {
-            print("NOT IMPLEMENTED")
+            var result: [Pokemon?] = []
+            if let number = Int(searchBar.text!) {
+                result = pdb.searchMinHP(number: number)
+                pokemonSearch = result
+                if result.count == 0 {
+                    warning(message: "No search results.")
+                    return
+                }
+                performSegue(withIdentifier: "segueToSearchVC", sender: self)
+                return
+            }
+            warning(message: "Please enter valid pokemon number.")
         }
     }
     
