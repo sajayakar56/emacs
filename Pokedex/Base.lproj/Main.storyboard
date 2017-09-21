@@ -69,16 +69,38 @@
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="toMainVC" id="byG-MN-JLs"/>
                         <segue destination="pXz-yG-n9Y" kind="show" identifier="segueToSearch" id="9VH-CL-7ml"/>
+                        <segue destination="wGL-Q0-aY9" kind="show" identifier="toWebSearch" id="kY0-5b-bhS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v3i-Gx-LGo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="718" y="741"/>
+            <point key="canvasLocation" x="625" y="969"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="JfV-Fw-zvQ">
+            <objects>
+                <viewController id="wGL-Q0-aY9" customClass="WebViewController" customModule="Pokedex" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BFI-iT-HjD"/>
+                        <viewControllerLayoutGuide type="bottom" id="wJJ-4A-OcR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nI8-bY-5GR">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="EAn-24-ZOH" kind="show" identifier="toPokemonVC" id="TrE-uu-PJw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8Bo-Bs-8z5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1473" y="741"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="cKZ-mB-W9t"/>
-        <segue reference="g4T-zo-NF0"/>
+        <segue reference="9VH-CL-7ml"/>
         <segue reference="mdr-5D-8C8"/>
+        <segue reference="byG-MN-JLs"/>
     </inferredMetricsTieBreakers>
 </document>

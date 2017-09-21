@@ -10,11 +10,15 @@ import UIKit
 
 class PokemonViewController: UIViewController {
     
-    var pokemon: Pokemon!
+    static var pokemon: Pokemon!
     
     var backButton: UIButton!
     
     var originScreen = 0 //1 for main vc and 2 for search vc
+    
+    var favoriteButton: UIButton! //add to favorites button
+    
+    var webButton: UIButton! //web search button
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,13 +41,13 @@ class PokemonViewController: UIViewController {
         
         // adding the pokemon image
         let pokemonImage = UIImageView(frame: CGRect(x: VFW * 0.15, y: VFH * 0.15, width: 125, height: 125))
-        pokemonImage.image = pokemon.getImage()
+        pokemonImage.image = PokemonViewController.pokemon.getImage()
         pokemonImage.contentMode = .scaleAspectFill
         view.addSubview(pokemonImage)
         
         // pokemon name
         let pokemonName = UILabel(frame: CGRect(x: backButton.frame.maxX + 15, y: 26, width: VFW * 0.7, height: 40))
-        let boldedText  = String(pokemon.number) + ".  " + pokemon.name
+        let boldedText  = String(PokemonViewController.pokemon.number) + ".  " + PokemonViewController.pokemon.name
         let attris = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 18)]
         let attributed = NSMutableAttributedString(string:boldedText, attributes:attris)
         pokemonName.attributedText = attributed
@@ -56,15 +60,15 @@ class PokemonViewController: UIViewController {
         var pokemonTypeImageArray: [UIImageView] = []
         
         // pokemon type image (for loop goes through all types of the pokemon)
-        let pokemonType = UIImageView(frame: CGRect(x: pokemonImage.frame.maxX + 9, y: pokemonImage.frame.minY + 30, width: 130, height: 40))
-        pokemonType.image = UIImage(named: pokemon.types[0].lowercased())
+        let pokemonType = UIImageView(frame: CGRect(x: pokemonImage.frame.maxX + 15, y: pokemonImage.frame.minY + 30, width: 130, height: 40))
+        pokemonType.image = UIImage(named: PokemonViewController.pokemon.types[0].lowercased())
         pokemonType.contentMode = .scaleAspectFit
         view.addSubview(pokemonType)
         pokemonTypeImageArray.append(pokemonType)
         
-        for i in 1..<pokemon.types.count {
-            let pokemonType = UIImageView(frame: CGRect(x: pokemonImage.frame.maxX + 9, y: pokemonTypeImageArray[i-1].frame.maxY + 5, width: 130, height: 40))
-            pokemonType.image = UIImage(named: pokemon.types[i].lowercased())
+        for i in 1..<PokemonViewController.pokemon.types.count {
+            let pokemonType = UIImageView(frame: CGRect(x: pokemonImage.frame.maxX + 15, y: pokemonTypeImageArray[i-1].frame.maxY + 5, width: 130, height: 40))
+            pokemonType.image = UIImage(named: PokemonViewController.pokemon.types[i].lowercased())
             pokemonType.contentMode = .scaleAspectFit
             view.addSubview(pokemonType)
         }
@@ -74,7 +78,7 @@ class PokemonViewController: UIViewController {
         let boldText  = "HP: "
         let attrs = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 16)]
         let attributedString = NSMutableAttributedString(string:boldText, attributes:attrs)
-        let normalText = String(pokemon.health)
+        let normalText = String(PokemonViewController.pokemon.health)
         let normalString = NSMutableAttributedString(string:normalText)
         attributedString.append(normalString)
         pokemonHP.attributedText = attributedString
@@ -84,7 +88,7 @@ class PokemonViewController: UIViewController {
         let boldText2  = "ATTACK: "
         let attrs2 = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 16)]
         let attributedString2 = NSMutableAttributedString(string:boldText2, attributes:attrs2)
-        let normalText2 = String(pokemon.attack)
+        let normalText2 = String(PokemonViewController.pokemon.attack)
         let normalString2 = NSMutableAttributedString(string:normalText2)
         attributedString2.append(normalString2)
         pokemonATK.attributedText = attributedString2
@@ -94,7 +98,7 @@ class PokemonViewController: UIViewController {
         let boldText3  = "DEFENSE: "
         let attrs3 = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 16)]
         let attributedString3 = NSMutableAttributedString(string:boldText3, attributes:attrs3)
-        let normalText3 = String(pokemon.defense)
+        let normalText3 = String(PokemonViewController.pokemon.defense)
         let normalString3 = NSMutableAttributedString(string:normalText3)
         attributedString3.append(normalString3)
         pokemonDEF.attributedText = attributedString3
@@ -104,7 +108,7 @@ class PokemonViewController: UIViewController {
         let boldText4  = "SPECIAL ATTACK: "
         let attrs4 = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 16)]
         let attributedString4 = NSMutableAttributedString(string:boldText4, attributes:attrs4)
-        let normalText4 = String(pokemon.specialAttack)
+        let normalText4 = String(PokemonViewController.pokemon.specialAttack)
         let normalString4 = NSMutableAttributedString(string:normalText4)
         attributedString4.append(normalString4)
         pokemonSPATK.attributedText = attributedString4
@@ -114,7 +118,7 @@ class PokemonViewController: UIViewController {
         let boldText5  = "SPECIAL DEFENSE: "
         let attrs5 = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 16)]
         let attributedString5 = NSMutableAttributedString(string:boldText5, attributes:attrs5)
-        let normalText5 = String(pokemon.specialDefense)
+        let normalText5 = String(PokemonViewController.pokemon.specialDefense)
         let normalString5 = NSMutableAttributedString(string:normalText5)
         attributedString5.append(normalString5)
         pokemonSPDEF.attributedText = attributedString5
@@ -124,7 +128,7 @@ class PokemonViewController: UIViewController {
         let boldText6  = "SPEED: "
         let attrs6 = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 16)]
         let attributedString6 = NSMutableAttributedString(string:boldText6, attributes:attrs6)
-        let normalText6 = String(pokemon.speed)
+        let normalText6 = String(PokemonViewController.pokemon.speed)
         let normalString6 = NSMutableAttributedString(string:normalText6)
         attributedString6.append(normalString6)
         pokemonSPD.attributedText = attributedString6
@@ -134,7 +138,7 @@ class PokemonViewController: UIViewController {
         let boldText7  = "SPECIES: "
         let attrs7 = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 16)]
         let attributedString7 = NSMutableAttributedString(string:boldText7, attributes:attrs7)
-        let normalText7 = String(pokemon.species)
+        let normalText7 = String(PokemonViewController.pokemon.species)
         let normalString7 = NSMutableAttributedString(string:normalText7!)
         attributedString7.append(normalString7)
         pokemonSPE.attributedText = attributedString7
@@ -144,11 +148,29 @@ class PokemonViewController: UIViewController {
         let boldText8  = "TOTAL: "
         let attrs8 = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 16)]
         let attributedString8 = NSMutableAttributedString(string:boldText8, attributes:attrs8)
-        let normalText8 = String(pokemon.total)
+        let normalText8 = String(PokemonViewController.pokemon.total)
         let normalString8 = NSMutableAttributedString(string:normalText8)
         attributedString8.append(normalString8)
         pokemonTOT.attributedText = attributedString8
         view.addSubview(pokemonTOT)
+        
+        // adding the favorites button
+        favoriteButton = UIButton(frame: CGRect(x: VFW * 0.60, y: pokemonHP.frame.minY, width: 140, height: 40))
+        favoriteButton.addTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
+        favoriteButton.setTitle("Add to Favorites", for: .normal)
+        favoriteButton.setTitleColor(UIColor.black, for: .normal)
+        favoriteButton.layer.cornerRadius = 8
+        favoriteButton.backgroundColor = UIColor.yellow
+        view.addSubview(favoriteButton)
+        
+        // adding the web button
+        webButton = UIButton(frame: CGRect(x: VFW * 0.60, y: favoriteButton.frame.maxY + 10, width: 140, height: 40))
+        webButton.setTitle("Search the Web", for: .normal)
+        webButton.setTitleColor(UIColor.black, for: .normal)
+        webButton.layer.cornerRadius = 8
+        webButton.backgroundColor = UIColor.yellow
+        webButton.addTarget(self, action: #selector(goToWebSearch), for: .touchUpInside)
+        view.addSubview(webButton)
         
     }
     
@@ -166,14 +188,19 @@ class PokemonViewController: UIViewController {
         }
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func goToWebSearch() {
+        self.performSegue(withIdentifier: "toWebSearch", sender: self)
     }
-    */
+    
+    func addToFavorites() {
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toWebSearch" {
+            let webVC = segue.destination as! WebViewController
+            webVC.url = "https://www.google.com/search?q=\(PokemonViewController.pokemon.name)"
+        }
+    }
 
 }
