@@ -28,6 +28,9 @@ class ViewController: UIViewController {
     var selectedMode: String!
     var typesCollectionView: UICollectionView!
     var typeImages = [UIImage(named: "bug"), UIImage(named: "dark"), UIImage(named: "dragon"), UIImage(named: "electric"), UIImage(named: "fairy"), UIImage(named: "fighting"), UIImage(named: "fire"), UIImage(named: "flying"), UIImage(named: "ghost"), UIImage(named: "grass"), UIImage(named: "ground"), UIImage(named: "ice"), UIImage(named: "normal"), UIImage(named: "poison"), UIImage(named: "psychic"), UIImage(named: "rock"), UIImage(named: "steel"), UIImage(named: "water")]
+
+    var selectedTypes: [String] = []
+    var selectedTypesNumber: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +62,7 @@ class ViewController: UIViewController {
         view.addSubview(searchButton)
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
         
         modeButton = UIButton(frame: CGRect(x: VFW/2 - 150, y: searchBar.frame.maxY + 20, width: 300, height: 60))
@@ -155,13 +159,15 @@ class ViewController: UIViewController {
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         typesCollectionView = UICollectionView(frame: CGRect(x: view.frame.width * 0.1,
-                                                             y: view.frame.height * 0.25,
+                                                             y: view.frame.height * 0.15,
                                                              width: view.frame.width * 0.8,
-                                                             height: 150), collectionViewLayout: layout)
+                                                             height: 200), collectionViewLayout: layout)
         typesCollectionView.backgroundColor = UIColor(white: 1, alpha: 0)
         typesCollectionView.register(TypeCollectionViewCell.self, forCellWithReuseIdentifier: "typeCell")
         typesCollectionView.delegate = self
         typesCollectionView.dataSource = self
+        typesCollectionView.allowsSelection = true
+        typesCollectionView.allowsMultipleSelection = true
         typesCollectionView.isHidden = true
     }
 }
@@ -188,7 +194,30 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 40, height: 20)
+        return CGSize(width: 100, height: 40)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let type: String = pdb.types[indexPath.row]
+        selectedTypes.append(type)
+        print("Added " + type)
+        let cell = collectionView.cellForItem(at: indexPath) as! TypeCollectionViewCell
+        cell.selectViewCell()
+        selectedTypesNumber += 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let type: String = pdb.types[indexPath.row]
+        for i in 0..<selectedTypesNumber {
+            if type == selectedTypes[i] {
+                selectedTypes.remove(at: i)
+                print("Removed type " + type)
+                selectedTypesNumber -= 1
+                let cell = collectionView.cellForItem(at: indexPath) as! TypeCollectionViewCell
+                cell.deselectViewCell()
+                return
+            }
+        }
     }
     
     // functions for picker view
@@ -235,6 +264,7 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource, UICollec
             } else {
                 warning(message: "Please enter valid pokemon name.")
             }
+            return
         }
         if selectedMode == "Number" {
             var result: Pokemon?
@@ -290,6 +320,7 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource, UICollec
             }
             warning(message: "Please enter valid pokemon number.")
         }
+        print("Probably failed lol")
     }
     
     func warning(message: String) {
