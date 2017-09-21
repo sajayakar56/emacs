@@ -84,13 +84,14 @@ class ViewController: UIViewController {
     func togglePickerView() {
         if !self.pickerView.isDescendant(of: view) {
             view.addSubview(self.pickerView)
+            modeButton.setTitle("Name", for: .normal)
+            selectedMode = "Name"
             view.bringSubview(toFront: self.pickerView)
         }
         else {
             self.pickerView.removeFromSuperview()
         }
     }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segueToSearchVC" {
             let searchVC = segue.destination as! SearchResultsViewController
@@ -101,7 +102,7 @@ class ViewController: UIViewController {
             pokemonVC.pokemon = pokemonToPass
         }
     }
-    
+
     func searchButtonPressed() {
         searchBarSearchButtonClicked(searchBar)
     }
@@ -113,13 +114,10 @@ class ViewController: UIViewController {
         } else if searchBar.isHidden {
             typeSelectorToSearchBar()
         }
-        self.pickerView.removeFromSuperview()
-        /*if selectedMode == "Number" {
+        else if selectedMode == "Number" {
             searchBar.keyboardType = .numberPad
         }
-        else {
-            searchBar.keyboardType = .default
-        }*/
+        self.pickerView.removeFromSuperview()
     }
     
     func searchBarToTypeSelector() {
