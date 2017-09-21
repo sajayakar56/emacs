@@ -20,6 +20,8 @@ class PokemonViewController: UIViewController {
     
     var webButton: UIButton! //web search button
     
+    var favorites = defaults.stringArray(forKey: "favorites")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -193,7 +195,9 @@ class PokemonViewController: UIViewController {
     }
     
     func addToFavorites() {
-        
+        // first get the current default fav
+        favorites!.append(PokemonViewController.pokemon.name)
+        defaults.set(favorites, forKey: "favorites")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

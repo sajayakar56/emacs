@@ -172,7 +172,9 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
+extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, UITabBarDelegate {
+    // functions for tab bar delegate
+    
     // functions for collection view of types
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1

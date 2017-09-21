@@ -102,4 +102,12 @@ class PDB {
         }
         return ret_list
     }
+    
+    func namesToPokemon(names: [String]) -> [Pokemon] {
+        var pokemonList : [Pokemon] = []
+        for name in names {
+            pokemonList.append(searchName(name: name)!)
+        }
+        return pokemonList
+    }
 }

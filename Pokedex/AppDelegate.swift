@@ -12,10 +12,16 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+//    var tabBar: UITabBarController!
+//    var storyBoard: UIStoryboard!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+//        storyBoard = UIStoryboard(name: "Main", bundle: nil)
+//        tabBar = UITabBarController()
+//        let vc = storyBoard.instantiateViewController(withIdentifier: "ViewController")
+//        let svc = storyBoard.instantiateViewController(withIdentifier: "SearchResultsViewController")
+//        tabBar.viewControllers = [vc, svc]
         return true
     }
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D3286631F7462A800B262E8 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3286621F7462A800B262E8 /* TabBarController.swift */; };
 		2D69CED51F71131700655283 /* PDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D69CED41F71131700655283 /* PDB.swift */; };
 		2DC061E21F73449E002BB2EB /* TypeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC061E11F73449E002BB2EB /* TypeCollectionViewCell.swift */; };
 		3CFC6F0F1D98716000B4EBB5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CFC6F0E1D98716000B4EBB5 /* AppDelegate.swift */; };
@@ -47,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2D3286621F7462A800B262E8 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		2D69CED41F71131700655283 /* PDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDB.swift; sourceTree = "<group>"; };
 		2DC061E11F73449E002BB2EB /* TypeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeCollectionViewCell.swift; sourceTree = "<group>"; };
 		3CFC6F0B1D98716000B4EBB5 /* Pokedex.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pokedex.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,6 +139,7 @@
 				3CFC6F3E1D9871F100B4EBB5 /* Pokemon.swift */,
 				3CFC6F401D9871FC00B4EBB5 /* PokemonGenerator.swift */,
 				3CFC6F121D98716000B4EBB5 /* Main.storyboard */,
+				2D3286621F7462A800B262E8 /* TabBarController.swift */,
 				3CFC6F171D98716000B4EBB5 /* LaunchScreen.storyboard */,
 				3CFC6F151D98716000B4EBB5 /* Assets.xcassets */,
 				B3D9D01A1F738CD300C9434C /* Info.plist */,
@@ -310,6 +313,7 @@
 				B3D9D0151F71E57F00C9434C /* PokemonViewController.swift in Sources */,
 				B3D9D0131F71E2E000C9434C /* PokemonTableViewCell.swift in Sources */,
 				2D69CED51F71131700655283 /* PDB.swift in Sources */,
+				2D3286631F7462A800B262E8 /* TabBarController.swift in Sources */,
 				B3D9D0211F74463200C9434C /* WebViewController.swift in Sources */,
 				3CFC6F3F1D9871F100B4EBB5 /* Pokemon.swift in Sources */,
 			);

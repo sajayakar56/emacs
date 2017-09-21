@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="cXP-AS-9VT">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,7 +9,26 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Tab Bar Controller-->
+        <scene sceneID="1wS-Q0-wyg">
+            <objects>
+                <tabBarController id="cXP-AS-9VT" customClass="TabBarController" customModule="Pokedex" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="qHf-eA-qyG"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="UoS-pM-Itp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="lh8-WJ-AmR"/>
+                        <segue destination="pXz-yG-n9Y" kind="relationship" relationship="viewControllers" id="Jlz-pi-diO"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xCz-fP-yYH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1626" y="140"/>
+        </scene>
+        <!--Search-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Pokedex" customModuleProvider="target" sceneMemberID="viewController">
@@ -22,6 +41,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Search" id="Sy1-5U-19o"/>
                     <connections>
                         <segue destination="pXz-yG-n9Y" kind="show" identifier="segueToSearchVC" id="g4T-zo-NF0"/>
                         <segue destination="EAn-24-ZOH" kind="show" identifier="segueToPokemonVC" id="wkm-2d-v3k"/>
@@ -31,7 +51,7 @@
             </objects>
             <point key="canvasLocation" x="-522" y="256"/>
         </scene>
-        <!--Search Results View Controller-->
+        <!--Favorites-->
         <scene sceneID="lKw-6N-gY9">
             <objects>
                 <viewController id="pXz-yG-n9Y" customClass="SearchResultsViewController" customModule="Pokedex" customModuleProvider="target" sceneMemberID="viewController">
@@ -44,9 +64,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Favorites" id="dgt-sw-Oep"/>
                     <connections>
                         <segue destination="EAn-24-ZOH" kind="show" identifier="segueToPokemonVC" id="mdr-5D-8C8"/>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="segueToMain" id="cKZ-mB-W9t"/>
+                        <segue destination="cXP-AS-9VT" kind="presentation" identifier="segueToMain" id="lPg-s9-Xcl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RQu-70-lh5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -67,9 +88,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="toMainVC" id="byG-MN-JLs"/>
                         <segue destination="pXz-yG-n9Y" kind="show" identifier="segueToSearch" id="9VH-CL-7ml"/>
                         <segue destination="wGL-Q0-aY9" kind="show" identifier="toWebSearch" id="kY0-5b-bhS"/>
+                        <segue destination="cXP-AS-9VT" kind="presentation" identifier="toMainVC" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="gsy-zB-6Hl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v3i-Gx-LGo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -99,8 +120,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="9VH-CL-7ml"/>
-        <segue reference="mdr-5D-8C8"/>
-        <segue reference="byG-MN-JLs"/>
+        <segue reference="gsy-zB-6Hl"/>
+        <segue reference="wkm-2d-v3k"/>
+        <segue reference="g4T-zo-NF0"/>
     </inferredMetricsTieBreakers>
 </document>
