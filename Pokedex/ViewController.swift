@@ -55,7 +55,7 @@ class ViewController: UIViewController {
         
         
         // Creating the button to search
-        searchButton = UIButton(frame: CGRect(x: VFW * 0.9, y: VFH * 0.3, width: 40, height: 40))
+        searchButton = UIButton(frame: CGRect(x: VFW * 0.9, y: searchBar.frame.maxY - view.frame.width * 0.2 + 7, width: 40, height: 40))
         searchButton.backgroundColor = UIColor.blue
         searchButton.setTitle("Go", for: .normal)
         searchButton.addTarget(self, action: #selector(searchButtonPressed), for: .touchUpInside)
@@ -162,7 +162,7 @@ class ViewController: UIViewController {
                                                              y: view.frame.height * 0.15,
                                                              width: view.frame.width * 0.8,
                                                              height: 200), collectionViewLayout: layout)
-        typesCollectionView.backgroundColor = UIColor(white: 1, alpha: 0)
+        typesCollectionView.backgroundColor = UIColor.clear
         typesCollectionView.register(TypeCollectionViewCell.self, forCellWithReuseIdentifier: "typeCell")
         typesCollectionView.delegate = self
         typesCollectionView.dataSource = self
@@ -200,7 +200,6 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource, UICollec
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let type: String = pdb.types[indexPath.row]
         selectedTypes.append(type)
-        print("Added " + type)
         let cell = collectionView.cellForItem(at: indexPath) as! TypeCollectionViewCell
         cell.selectViewCell()
         selectedTypesNumber += 1
@@ -211,7 +210,6 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource, UICollec
         for i in 0..<selectedTypesNumber {
             if type == selectedTypes[i] {
                 selectedTypes.remove(at: i)
-                print("Removed type " + type)
                 selectedTypesNumber -= 1
                 let cell = collectionView.cellForItem(at: indexPath) as! TypeCollectionViewCell
                 cell.deselectViewCell()

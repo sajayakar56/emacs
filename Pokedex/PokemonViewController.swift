@@ -36,30 +36,34 @@ class PokemonViewController: UIViewController {
         view.addSubview(backButton)
         
         // adding the pokemon image
-        let pokemonImage = UIImageView(frame: CGRect(x: VFW * 0.18, y: VFH * 0.15, width: 125, height: 125))
+        let pokemonImage = UIImageView(frame: CGRect(x: VFW * 0.15, y: VFH * 0.15, width: 125, height: 125))
         pokemonImage.image = pokemon.getImage()
         pokemonImage.contentMode = .scaleAspectFill
         view.addSubview(pokemonImage)
         
         // pokemon name
-        let pokemonName = UILabel(frame: CGRect(x: pokemonImage.frame.maxX + 18, y: VFH * 0.15, width: 140, height: 40))
+        let pokemonName = UILabel(frame: CGRect(x: backButton.frame.maxX + 15, y: 26, width: VFW * 0.7, height: 40))
         let boldedText  = String(pokemon.number) + ".  " + pokemon.name
-        let attris = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 16)]
+        let attris = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 18)]
         let attributed = NSMutableAttributedString(string:boldedText, attributes:attris)
         pokemonName.attributedText = attributed
+        pokemonName.numberOfLines = 0
+        pokemonName.lineBreakMode = .byWordWrapping
+        pokemonName.sizeToFit()
+        
         view.addSubview(pokemonName)
         
         var pokemonTypeImageArray: [UIImageView] = []
         
         // pokemon type image (for loop goes through all types of the pokemon)
-        let pokemonType = UIImageView(frame: CGRect(x: pokemonImage.frame.maxX + 3, y: pokemonName.frame.maxY + 8, width: 130, height: 40))
+        let pokemonType = UIImageView(frame: CGRect(x: pokemonImage.frame.maxX + 9, y: pokemonImage.frame.minY + 30, width: 130, height: 40))
         pokemonType.image = UIImage(named: pokemon.types[0].lowercased())
         pokemonType.contentMode = .scaleAspectFit
         view.addSubview(pokemonType)
         pokemonTypeImageArray.append(pokemonType)
         
         for i in 1..<pokemon.types.count {
-            let pokemonType = UIImageView(frame: CGRect(x: pokemonImage.frame.maxX + 3, y: pokemonTypeImageArray[i-1].frame.maxY + 5, width: VFW * 0.5, height: 40))
+            let pokemonType = UIImageView(frame: CGRect(x: pokemonImage.frame.maxX + 9, y: pokemonTypeImageArray[i-1].frame.maxY + 5, width: 130, height: 40))
             pokemonType.image = UIImage(named: pokemon.types[i].lowercased())
             pokemonType.contentMode = .scaleAspectFit
             view.addSubview(pokemonType)

@@ -93,7 +93,7 @@ class SearchResultsViewController: UIViewController {
         collectionView.register(PokemonCollectionViewCell.self, forCellWithReuseIdentifier: "collectionViewCell")
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.backgroundColor = UIColor.white
+        collectionView.backgroundColor = UIColor.lightGray
         view.addSubview(collectionView)
     }
     
@@ -175,6 +175,21 @@ extension SearchResultsViewController: UICollectionViewDataSource, UICollectionV
         
         cell.awakeFromNib()
         cell.pokemonImage.image = SearchResultsViewController.pokemonList[indexPath.row]?.getImage()
+        let hasAlpha = true
+        let scale: CGFloat = 0.0 // Use scale factor of main screen
+        
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: cell.frame.width * 0.7, height: cell.frame.height * 0.7), !hasAlpha, scale)
+        cell.pokemonImage.image?.draw(in: CGRect(origin: CGPoint.zero, size: CGSize(width: cell.frame.width * 0.7, height: cell.frame.height * 0.7)))
+        
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        
+        cell.pokemonImage.image = scaledImage
+        
+        let boldedText  = SearchResultsViewController.pokemonList[indexPath.row]?.name
+        let attris = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 12)]
+        let attributed = NSMutableAttributedString(string:boldedText!, attributes:attris)
+
+        cell.pokemonName.attributedText = attributed
         return cell
     }
     
