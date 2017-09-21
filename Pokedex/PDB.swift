@@ -44,11 +44,15 @@ class PDB {
         return nil
     }
 
-    func searchType(type: String) -> [Pokemon?] {
+    // modified to support multiple type searching
+    func searchTypes(types: [String]) -> [Pokemon?] {
         var ret_list: [Pokemon] = []
         for pokemon in pokemon_array {
-            if pokemon.types.contains(type) {
-                ret_list.append(pokemon)
+            for type in pokemon.types {
+                if types.contains(type) {
+                    ret_list.append(pokemon)
+                    break
+                }
             }
         }
         return ret_list
