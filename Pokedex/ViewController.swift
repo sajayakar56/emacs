@@ -66,6 +66,8 @@ class ViewController: UIViewController, UISearchBarDelegate {
     func togglePickerView() {
         if !self.pickerView.isDescendant(of: view) {
             view.addSubview(self.pickerView)
+            modeButton.setTitle("Name", for: .normal)
+            selectedMode = "Name"
             view.bringSubview(toFront: self.pickerView)
         }
         else {
@@ -76,7 +78,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
     func setupPickerView() {
         self.pickerView.dataSource = self
         self.pickerView.delegate = self
-        self.pickerView.frame = CGRect(x: 0, y: modeButton.frame.maxY + 5, width: view.frame.width, height: 200)
+        self.pickerView.frame = CGRect(x: 0, y: modeButton.frame.maxY + 5, width: view.frame.width, height: 250)
         self.pickerView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
     }
     
@@ -92,6 +94,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.pickerView.removeFromSuperview()
         if selectedMode == "Name" {
             let result: Pokemon? = pdb.searchName(name: searchBar.text!)
             if let x = result {

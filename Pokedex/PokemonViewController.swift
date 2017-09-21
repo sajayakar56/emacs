@@ -9,14 +9,9 @@
 import UIKit
 
 class PokemonViewController: UIViewController {
-    // remove this shit
+    
     var pokemon: Pokemon!
-    // var pokemon: Pokemon!
-    var pokemonImage: UIImageView!
-    var pokemonName: UITextView!
-    var pokemonType: UIImageView!
-    // change from text view to table view
-    var pokemonStats: UITextView!
+    
     var backButton: UIButton!
     
     override func viewDidLoad() {
@@ -30,42 +25,125 @@ class PokemonViewController: UIViewController {
         let VFW = view.frame.width
         let VFH = view.frame.height
         // adding the back button
-        backButton = UIButton(frame: CGRect(x: 20, y: 20, width: 40, height: 40))
+        backButton = UIButton(frame: CGRect(x: 20, y: 25, width: 60, height: 40))
         backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-        backButton.setTitle("👈", for: .normal)
-        backButton.setTitleColor(UIColor.black, for: .normal)
+        backButton.setTitle("Back", for: .normal)
+        backButton.setTitleColor(UIColor.white, for: .normal)
         backButton.layer.cornerRadius = 8
-        backButton.backgroundColor = UIColor.purple
+        backButton.backgroundColor = UIColor.red
         view.addSubview(backButton)
         
         // adding the pokemon image
-        pokemonImage = UIImageView(frame: CGRect(x: VFW * 0.1, y: VFH * 0.1, width: 40, height: 40))
+        let pokemonImage = UIImageView(frame: CGRect(x: VFW * 0.18, y: VFH * 0.15, width: 125, height: 125))
         pokemonImage.image = pokemon.getImage()
         pokemonImage.contentMode = .scaleAspectFill
         view.addSubview(pokemonImage)
         
         // pokemon name
-        pokemonName = UITextView(frame: CGRect(x: VFW * 0.6, y: VFH * 0.2, width: VFW * 0.5, height: 40))
-        pokemonName.text = String(pokemon.number) + " " + pokemon.name
+        let pokemonName = UILabel(frame: CGRect(x: pokemonImage.frame.maxX + 18, y: VFH * 0.15, width: 140, height: 40))
+        let boldedText  = String(pokemon.number) + ".  " + pokemon.name
+        let attris = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 16)]
+        let attributed = NSMutableAttributedString(string:boldedText, attributes:attris)
+        pokemonName.attributedText = attributed
         view.addSubview(pokemonName)
         
-        // pokemon type image (only supports one type right now needs to be changed!)
-        pokemonType = UIImageView(frame: CGRect(x: VFW * 0.6, y: VFH * 0.24, width: VFW * 0.5, height: 40))
+        var pokemonTypeImageArray: [UIImageView] = []
+        
+        // pokemon type image (for loop goes through all types of the pokemon)
+        let pokemonType = UIImageView(frame: CGRect(x: pokemonImage.frame.maxX + 3, y: pokemonName.frame.maxY + 8, width: 130, height: 40))
         pokemonType.image = UIImage(named: pokemon.types[0].lowercased())
         pokemonType.contentMode = .scaleAspectFit
         view.addSubview(pokemonType)
+        pokemonTypeImageArray.append(pokemonType)
+        
+        for i in 1..<pokemon.types.count {
+            let pokemonType = UIImageView(frame: CGRect(x: pokemonImage.frame.maxX + 3, y: pokemonTypeImageArray[i-1].frame.maxY + 5, width: VFW * 0.5, height: 40))
+            pokemonType.image = UIImage(named: pokemon.types[i].lowercased())
+            pokemonType.contentMode = .scaleAspectFit
+            view.addSubview(pokemonType)
+        }
         
         // pokemon stats
-        pokemonStats = UITextView(frame: CGRect(x: VFW * 0.1, y: VFH * 0.4, width: VFW * 0.8, height: VFH * 0.6))
-        pokemonStats.text = "HP: " + String(pokemon.health) + "\n"
-        pokemonStats.text = pokemonStats.text + "ATK: " + String(pokemon.attack) + "\n"
-        pokemonStats.text = pokemonStats.text + "DEF: " + String(pokemon.defense) + "\n"
-        pokemonStats.text = pokemonStats.text + "SPATK: " + String(pokemon.specialAttack) + "\n"
-        pokemonStats.text = pokemonStats.text + "SPDEF: " + String(pokemon.specialDefense) + "\n"
-        pokemonStats.text = pokemonStats.text + "SPD: " + String(pokemon.speed) + "\n"
-        pokemonStats.text = pokemonStats.text + "Species: " + String(pokemon.species) + "\n"
-        pokemonStats.text = pokemonStats.text + "Total: " + String(pokemon.total) + "\n"
-        view.addSubview(pokemonStats)
+        let pokemonHP = UILabel(frame: CGRect(x: VFW * 0.2, y: pokemonImage.frame.maxY + 40, width: VFW * 0.6, height: 40))
+        let boldText  = "HP: "
+        let attrs = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 16)]
+        let attributedString = NSMutableAttributedString(string:boldText, attributes:attrs)
+        let normalText = String(pokemon.health)
+        let normalString = NSMutableAttributedString(string:normalText)
+        attributedString.append(normalString)
+        pokemonHP.attributedText = attributedString
+        view.addSubview(pokemonHP)
+        
+        let pokemonATK = UILabel(frame: CGRect(x: VFW * 0.2, y: pokemonHP.frame.maxY + 5, width: VFW * 0.6, height: 40))
+        let boldText2  = "ATTACK: "
+        let attrs2 = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 16)]
+        let attributedString2 = NSMutableAttributedString(string:boldText2, attributes:attrs2)
+        let normalText2 = String(pokemon.attack)
+        let normalString2 = NSMutableAttributedString(string:normalText2)
+        attributedString2.append(normalString2)
+        pokemonATK.attributedText = attributedString2
+        view.addSubview(pokemonATK)
+        
+        let pokemonDEF = UILabel(frame: CGRect(x: VFW * 0.2, y: pokemonATK.frame.maxY + 5, width: VFW * 0.6, height: 40))
+        let boldText3  = "DEFENSE: "
+        let attrs3 = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 16)]
+        let attributedString3 = NSMutableAttributedString(string:boldText3, attributes:attrs3)
+        let normalText3 = String(pokemon.defense)
+        let normalString3 = NSMutableAttributedString(string:normalText3)
+        attributedString3.append(normalString3)
+        pokemonDEF.attributedText = attributedString3
+        view.addSubview(pokemonDEF)
+        
+        let pokemonSPATK = UILabel(frame: CGRect(x: VFW * 0.2, y: pokemonDEF.frame.maxY + 5, width: VFW * 0.6, height: 40))
+        let boldText4  = "SPECIAL ATTACK: "
+        let attrs4 = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 16)]
+        let attributedString4 = NSMutableAttributedString(string:boldText4, attributes:attrs4)
+        let normalText4 = String(pokemon.specialAttack)
+        let normalString4 = NSMutableAttributedString(string:normalText4)
+        attributedString4.append(normalString4)
+        pokemonSPATK.attributedText = attributedString4
+        view.addSubview(pokemonSPATK)
+        
+        let pokemonSPDEF = UILabel(frame: CGRect(x: VFW * 0.2, y: pokemonSPATK.frame.maxY + 5, width: VFW * 0.6, height: 40))
+        let boldText5  = "SPECIAL DEFENSE: "
+        let attrs5 = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 16)]
+        let attributedString5 = NSMutableAttributedString(string:boldText5, attributes:attrs5)
+        let normalText5 = String(pokemon.specialDefense)
+        let normalString5 = NSMutableAttributedString(string:normalText5)
+        attributedString5.append(normalString5)
+        pokemonSPDEF.attributedText = attributedString5
+        view.addSubview(pokemonSPDEF)
+        
+        let pokemonSPD = UILabel(frame: CGRect(x: VFW * 0.2, y: pokemonSPDEF.frame.maxY + 5, width: VFW * 0.6, height: 40))
+        let boldText6  = "SPEED: "
+        let attrs6 = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 16)]
+        let attributedString6 = NSMutableAttributedString(string:boldText6, attributes:attrs6)
+        let normalText6 = String(pokemon.speed)
+        let normalString6 = NSMutableAttributedString(string:normalText6)
+        attributedString6.append(normalString6)
+        pokemonSPD.attributedText = attributedString6
+        view.addSubview(pokemonSPD)
+        
+        let pokemonSPE = UILabel(frame: CGRect(x: VFW * 0.2, y: pokemonSPD.frame.maxY + 5, width: VFW * 0.6, height: 40))
+        let boldText7  = "SPECIES: "
+        let attrs7 = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 16)]
+        let attributedString7 = NSMutableAttributedString(string:boldText7, attributes:attrs7)
+        let normalText7 = String(pokemon.species)
+        let normalString7 = NSMutableAttributedString(string:normalText7!)
+        attributedString7.append(normalString7)
+        pokemonSPE.attributedText = attributedString7
+        view.addSubview(pokemonSPE)
+        
+        let pokemonTOT = UILabel(frame: CGRect(x: VFW * 0.2, y: pokemonSPE.frame.maxY + 5, width: VFW * 0.6, height: 40))
+        let boldText8  = "TOTAL: "
+        let attrs8 = [NSFontAttributeName : UIFont.boldSystemFont(ofSize: 16)]
+        let attributedString8 = NSMutableAttributedString(string:boldText8, attributes:attrs8)
+        let normalText8 = String(pokemon.total)
+        let normalString8 = NSMutableAttributedString(string:normalText8)
+        attributedString8.append(normalString8)
+        pokemonTOT.attributedText = attributedString8
+        view.addSubview(pokemonTOT)
+        
     }
     
     override func didReceiveMemoryWarning() {
