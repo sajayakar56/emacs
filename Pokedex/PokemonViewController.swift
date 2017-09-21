@@ -156,7 +156,7 @@ class PokemonViewController: UIViewController {
         
         // adding the favorites button
         favoriteButton = UIButton(frame: CGRect(x: VFW * 0.60, y: pokemonHP.frame.minY, width: 140, height: 40))
-        favoriteButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+        favoriteButton.addTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
         favoriteButton.setTitle("Add to Favorites", for: .normal)
         favoriteButton.setTitleColor(UIColor.black, for: .normal)
         favoriteButton.layer.cornerRadius = 8
@@ -190,6 +190,10 @@ class PokemonViewController: UIViewController {
     
     func goToWebSearch() {
         self.performSegue(withIdentifier: "toWebSearch", sender: self)
+    }
+    
+    func addToFavorites() {
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

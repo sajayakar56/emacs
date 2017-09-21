@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     var pokemonSearch: [Pokemon?] = []
     
     var pickerView: UIPickerView = UIPickerView() //pickervew to select a mode
-    var modeArray: [String] = ["Name", "Number", "Type", "Minimum Attack Points", "Minimum Defense Points", "Minimum Health Points"]
+    var modeArray: [String] = ["Name", "Number", "Type", "Minimum Attack Points", "Minimum Defense Points", "Minimum Health Points", "Random"]
     var selectedMode: String!
     var typesCollectionView: UICollectionView!
     var typeImages = [UIImage(named: "bug"), UIImage(named: "dark"), UIImage(named: "dragon"), UIImage(named: "electric"), UIImage(named: "fairy"), UIImage(named: "fighting"), UIImage(named: "fire"), UIImage(named: "flying"), UIImage(named: "ghost"), UIImage(named: "grass"), UIImage(named: "ground"), UIImage(named: "ice"), UIImage(named: "normal"), UIImage(named: "poison"), UIImage(named: "psychic"), UIImage(named: "rock"), UIImage(named: "steel"), UIImage(named: "water")]
@@ -329,7 +329,12 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource, UICollec
             performSegue(withIdentifier: "segueToSearchVC", sender: self)
             return
         }
-        print("Probably failed lol")
+        if selectedMode == "Random" {
+            var result: [Pokemon?] = []
+            result = pdb.randomPokemon(number: 20)
+            pokemonSearch = result
+            performSegue(withIdentifier: "segueToSearchVC", sender: self)
+        }
     }
     
     func warning(message: String) {
