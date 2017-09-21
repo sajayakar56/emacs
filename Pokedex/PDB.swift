@@ -10,7 +10,7 @@ import Foundation
 
 class PDB {
     var pokemon_array: [Pokemon]
-    var types: [String] = ["bug", "dark", "dragon", "electric", "fairy", "fighting", "fire", "flying", "ghost", "grass", "ground", "ice", "normal", "poison", "psychic", "rock", "steel", "water"]
+    var types: [String] = ["Bug", "Dark", "Dragon", "Electric", "Fairy", "Fighting", "Fire", "Flying", "Ghost", "Grass", "Ground", "Ice", "Normal", "Poison", "Psychic", "Rock", "Steel", "Water"]
     
     init() {
         pokemon_array = PokemonGenerator.getPokemonArray()

@@ -320,6 +320,17 @@ extension ViewController: UIPickerViewDelegate, UIPickerViewDataSource, UICollec
             }
             warning(message: "Please enter valid pokemon number.")
         }
+        if selectedMode == "Type" {
+            var result: [Pokemon?] = []
+            result = pdb.searchTypes(types: selectedTypes)
+            pokemonSearch = result
+            if result.count == 0 {
+                warning(message: "No search results.")
+                return
+            }
+            performSegue(withIdentifier: "segueToSearchVC", sender: self)
+            return
+        }
         print("Probably failed lol")
     }
     
