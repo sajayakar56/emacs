@@ -162,7 +162,7 @@ class ViewController: UIViewController {
                                                              y: view.frame.height * 0.15,
                                                              width: view.frame.width * 0.8,
                                                              height: 200), collectionViewLayout: layout)
-        typesCollectionView.backgroundColor = UIColor(white: 1, alpha: 0)
+        typesCollectionView.backgroundColor = UIColor.clear
         typesCollectionView.register(TypeCollectionViewCell.self, forCellWithReuseIdentifier: "typeCell")
         typesCollectionView.delegate = self
         typesCollectionView.dataSource = self
