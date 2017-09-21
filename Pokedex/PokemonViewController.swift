@@ -20,13 +20,19 @@ class PokemonViewController: UIViewController {
     
     var webButton: UIButton! //web search button
     
-    var favorites = defaults.stringArray(forKey: "favorites")
+    var favorites = defaults.stringArray(forKey: "favorites")!
+    
+    var isAFavorite: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         // remove this
         setupUI()
+        isAFavorite = favorites.contains(PokemonViewController.pokemon.name)
+        print(PokemonViewController.pokemon.name)
+        print(favorites)
+        updateFavoritesButton()
     }
 
     func setupUI() {
@@ -195,9 +201,33 @@ class PokemonViewController: UIViewController {
     }
     
     func addToFavorites() {
-        // first get the current default fav
-        favorites!.append(PokemonViewController.pokemon.name)
-        defaults.set(favorites, forKey: "favorites")
+        // this one actually removes from favorites lol
+        if isAFavorite {
+            isAFavorite = false
+            for i in 0..<favorites.count {
+                if favorites[i] == PokemonViewController.pokemon.name {
+                    favorites.remove(at: i)
+                    defaults.set(favorites, forKey: "favorites")
+                    break
+                }
+            }
+            print("removed a favorite")
+        } else {
+            // and this one adds to them
+            favorites.append(PokemonViewController.pokemon.name)
+            defaults.set(favorites, forKey: "favorites")
+            isAFavorite = true
+            print("added a favorite")
+        }
+        updateFavoritesButton()
+    }
+    
+    func updateFavoritesButton() {
+        if isAFavorite {
+            favoriteButton.setTitle("Remove Favorite", for: .normal)
+        } else {
+            favoriteButton.setTitle("Add to Favorites", for: .normal)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
