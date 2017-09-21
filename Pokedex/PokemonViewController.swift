@@ -60,14 +60,14 @@ class PokemonViewController: UIViewController {
         var pokemonTypeImageArray: [UIImageView] = []
         
         // pokemon type image (for loop goes through all types of the pokemon)
-        let pokemonType = UIImageView(frame: CGRect(x: pokemonImage.frame.maxX + 9, y: pokemonImage.frame.minY + 30, width: 130, height: 40))
+        let pokemonType = UIImageView(frame: CGRect(x: pokemonImage.frame.maxX + 15, y: pokemonImage.frame.minY + 30, width: 130, height: 40))
         pokemonType.image = UIImage(named: PokemonViewController.pokemon.types[0].lowercased())
         pokemonType.contentMode = .scaleAspectFit
         view.addSubview(pokemonType)
         pokemonTypeImageArray.append(pokemonType)
         
         for i in 1..<PokemonViewController.pokemon.types.count {
-            let pokemonType = UIImageView(frame: CGRect(x: pokemonImage.frame.maxX + 9, y: pokemonTypeImageArray[i-1].frame.maxY + 5, width: 130, height: 40))
+            let pokemonType = UIImageView(frame: CGRect(x: pokemonImage.frame.maxX + 15, y: pokemonTypeImageArray[i-1].frame.maxY + 5, width: 130, height: 40))
             pokemonType.image = UIImage(named: PokemonViewController.pokemon.types[i].lowercased())
             pokemonType.contentMode = .scaleAspectFit
             view.addSubview(pokemonType)
@@ -165,7 +165,6 @@ class PokemonViewController: UIViewController {
         
         // adding the web button
         webButton = UIButton(frame: CGRect(x: VFW * 0.60, y: favoriteButton.frame.maxY + 10, width: 140, height: 40))
-        webButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         webButton.setTitle("Search the Web", for: .normal)
         webButton.setTitleColor(UIColor.black, for: .normal)
         webButton.layer.cornerRadius = 8

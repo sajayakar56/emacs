@@ -26,7 +26,7 @@ class WebViewController: UIViewController {
         backButton.backgroundColor = UIColor.red
         view.addSubview(backButton)
         
-        let myWebView: UIWebView = UIWebView(frame: view.frame)
+        let myWebView: UIWebView = UIWebView(frame: CGRect(x: 0, y: 75, width: view.frame.width, height: view.frame.height - 75))
         let urlStr : NSString = url.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)! as NSString
         let searchURL : URL = URL(string: urlStr as String)!
         myWebView.loadRequest(URLRequest(url: searchURL))
