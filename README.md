@@ -9,3 +9,6 @@ Features:
 - Local favorites!
 - Detailed Pokemon information
 - Extensive use of table and collection views
+
+# Screenshot
+![Alt text](screenshot.jpg)
