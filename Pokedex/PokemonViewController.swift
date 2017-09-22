@@ -24,6 +24,10 @@ class PokemonViewController: UIViewController {
     
     var isAFavorite: Bool = false
     
+    var storedFavorite: Bool = false
+    
+    var background: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -32,12 +36,18 @@ class PokemonViewController: UIViewController {
         isAFavorite = favorites.contains(PokemonViewController.pokemon.name)
         print(PokemonViewController.pokemon.name)
         print(favorites)
+        storedFavorite = isAFavorite
         updateFavoritesButton()
     }
 
     func setupUI() {
         let VFW = view.frame.width
         let VFH = view.frame.height
+        // adding the background
+        background = UIImageView(frame: view.frame)
+        background.image = UIImage(named: "pokedexBackground")
+        view.addSubview(background)
+        
         // adding the back button
         backButton = UIButton(frame: CGRect(x: 20, y: 25, width: 60, height: 40))
         backButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
@@ -188,9 +198,12 @@ class PokemonViewController: UIViewController {
     }
     
     func goBack() {
+        if storedFavorite {
+            originScreen = 1
+        }
         if originScreen == 1 {
             self.performSegue(withIdentifier: "toMainVC", sender: self)
-        }
+        } 
         else {
             self.performSegue(withIdentifier: "segueToSearch", sender: self)
         }
@@ -233,7 +246,7 @@ class PokemonViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toWebSearch" {
             let webVC = segue.destination as! WebViewController
-            webVC.url = "https://www.google.com/search?q=\(PokemonViewController.pokemon.name)"
+            webVC.url = "https://www.google.com/search?q=\(PokemonViewController.pokemon.name!)"
         }
     }
 

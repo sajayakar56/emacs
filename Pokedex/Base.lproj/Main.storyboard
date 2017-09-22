@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="cXP-AS-9VT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="cXP-AS-9VT">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -28,7 +28,7 @@
             </objects>
             <point key="canvasLocation" x="-1626" y="140"/>
         </scene>
-        <!--Search-->
+        <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Pokedex" customModuleProvider="target" sceneMemberID="viewController">
@@ -41,7 +41,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Search" id="Sy1-5U-19o"/>
+                    <tabBarItem key="tabBarItem" title="" image="searchButton" id="Sy1-5U-19o"/>
                     <connections>
                         <segue destination="pXz-yG-n9Y" kind="show" identifier="segueToSearchVC" id="g4T-zo-NF0"/>
                         <segue destination="EAn-24-ZOH" kind="show" identifier="segueToPokemonVC" id="wkm-2d-v3k"/>
@@ -51,7 +51,7 @@
             </objects>
             <point key="canvasLocation" x="-522" y="256"/>
         </scene>
-        <!--Favorites-->
+        <!--Search Results View Controller-->
         <scene sceneID="lKw-6N-gY9">
             <objects>
                 <viewController id="pXz-yG-n9Y" customClass="SearchResultsViewController" customModule="Pokedex" customModuleProvider="target" sceneMemberID="viewController">
@@ -64,10 +64,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Favorites" id="dgt-sw-Oep"/>
+                    <tabBarItem key="tabBarItem" tag="1" title="" image="favorite" id="dgt-sw-Oep"/>
                     <connections>
                         <segue destination="EAn-24-ZOH" kind="show" identifier="segueToPokemonVC" id="mdr-5D-8C8"/>
-                        <segue destination="cXP-AS-9VT" kind="presentation" identifier="segueToMain" id="lPg-s9-Xcl"/>
+                        <segue destination="cXP-AS-9VT" kind="presentation" identifier="segueToMain" modalTransitionStyle="flipHorizontal" id="lPg-s9-Xcl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RQu-70-lh5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -88,7 +88,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="pXz-yG-n9Y" kind="show" identifier="segueToSearch" id="9VH-CL-7ml"/>
+                        <segue destination="pXz-yG-n9Y" kind="presentation" identifier="segueToSearch" modalTransitionStyle="crossDissolve" id="9VH-CL-7ml"/>
                         <segue destination="wGL-Q0-aY9" kind="show" identifier="toWebSearch" id="kY0-5b-bhS"/>
                         <segue destination="cXP-AS-9VT" kind="presentation" identifier="toMainVC" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="gsy-zB-6Hl"/>
                     </connections>
@@ -111,7 +111,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="EAn-24-ZOH" kind="show" identifier="toPokemonVC" id="TrE-uu-PJw"/>
+                        <segue destination="EAn-24-ZOH" kind="presentation" identifier="toPokemonVC" modalTransitionStyle="crossDissolve" id="TrE-uu-PJw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Bo-Bs-8z5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -119,9 +119,13 @@
             <point key="canvasLocation" x="1473" y="741"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="favorite" width="40" height="40"/>
+        <image name="searchButton" width="30" height="30"/>
+    </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gsy-zB-6Hl"/>
-        <segue reference="wkm-2d-v3k"/>
-        <segue reference="g4T-zo-NF0"/>
+        <segue reference="TrE-uu-PJw"/>
+        <segue reference="9VH-CL-7ml"/>
+        <segue reference="lPg-s9-Xcl"/>
     </inferredMetricsTieBreakers>
 </document>

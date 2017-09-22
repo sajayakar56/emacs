@@ -11,6 +11,8 @@ import Foundation
 class PDB {
     var pokemon_array: [Pokemon]
     var types: [String] = ["Bug", "Dark", "Dragon", "Electric", "Fairy", "Fighting", "Fire", "Flying", "Ghost", "Grass", "Ground", "Ice", "Normal", "Poison", "Psychic", "Rock", "Steel", "Water"]
+
+    static var brokenLinks = ["Farfetch'd": "farfetchd", "Deoxys ( Attack Forme )": "deoxys-attack", "Deoxys ( Defense Forme )": "deoxys-defense", "Deoxys ( Speed Forme )": "deoxys-speed", "Deoxys ( Normal Forme )": "deoxys-normal"]
     
     init() {
         pokemon_array = PokemonGenerator.getPokemonArray()

@@ -11,7 +11,7 @@ import UIKit
 class PokemonCollectionViewCell: UICollectionViewCell {
     
     var pokemonImage: UIImageView! //image view containing image of pokemon
-    var pokemonName: UILabel!
+    var pokemonName: UIOutlinedLabel!
     
     override func awakeFromNib() {
         
@@ -19,10 +19,11 @@ class PokemonCollectionViewCell: UICollectionViewCell {
         pokemonImage.contentMode = .scaleAspectFill
         contentView.addSubview(pokemonImage)
         
-        pokemonName = UILabel(frame: CGRect(x: contentView.frame.width * 0.5, y: contentView.frame.height * 0.5, width: contentView.frame.width * 0.5, height: contentView.frame.height * 0.5))
+        pokemonName = UIOutlinedLabel(frame: CGRect(x: contentView.frame.width * 0.2, y: contentView.frame.height * 0.7, width: contentView.frame.width * 0.9, height: contentView.frame.height * 0.3))
         pokemonName.lineBreakMode = .byWordWrapping
         pokemonName.numberOfLines = 3
-        pokemonName.font = pokemonName.font.withSize(12)
+        pokemonName.font = pokemonName.font.withSize(13)
+        pokemonName.textColor = UIColor.white
         contentView.addSubview(pokemonName)
     }
     

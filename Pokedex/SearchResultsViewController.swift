@@ -11,6 +11,7 @@ import UIKit
 class SearchResultsViewController: UIViewController {
     
     static var pokemonList: [Pokemon?] = [] //list containing pokemons returned from search
+    static var favorites: Bool = false
     
     var segmentedControl: UISegmentedControl!   //What we will use to switch between the table and collection views
     var collectionView: UICollectionView!   //collectionView for displaying search results in image form

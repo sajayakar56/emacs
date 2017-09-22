@@ -33,11 +33,12 @@ class TabBarController: UITabBarController {
 
 extension TabBarController: UITabBarControllerDelegate {
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        if item.title == "Favorites" {
+        if item.tag == 1 {
             print("Loading favorites")
             let originalVC = self.viewControllers?[0] as! ViewController
             originalVC.pokemonSearch = originalVC.pdb.namesToPokemon(names: favorites as! [String])
             SearchResultsViewController.pokemonList = originalVC.pokemonSearch
+            SearchResultsViewController.favorites = true
         }
     }
 }

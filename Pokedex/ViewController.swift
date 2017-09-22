@@ -23,7 +23,9 @@ class ViewController: UIViewController {
     var pokemonToPass: Pokemon?
     var pokemonSearch: [Pokemon?] = []
     
-    var pickerView: UIPickerView = UIPickerView() //pickervew to select a mode
+    // Picker view to select a mode
+    var pickerView: UIPickerView = UIPickerView()
+    // An array of all the mode types
     var modeArray: [String] = ["Name", "Number", "Type", "Minimum Attack Points", "Minimum Defense Points", "Minimum Health Points", "Random"]
     var selectedMode: String!
     var typesCollectionView: UICollectionView!
@@ -140,7 +142,7 @@ class ViewController: UIViewController {
     func setupPickerView() {
         self.pickerView.dataSource = self
         self.pickerView.delegate = self
-        self.pickerView.frame = CGRect(x: 0, y: modeButton.frame.maxY + 5, width: view.frame.width, height: 200)
+        self.pickerView.frame = CGRect(x: 0, y: modeButton.frame.maxY + 5, width: view.frame.width, height: view.frame.height - modeButton.frame.maxY + 5)
         self.pickerView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
     }
     

@@ -58,8 +58,14 @@ class Pokemon {
     }
     
     func getImage() -> UIImage {
-        // from stackoverflow #24231680
-        let url = URL(string: self.imageUrl)
+        // add check if URL would be invalid
+        var url: URL?
+        if PDB.brokenLinks.keys.contains(self.name) {
+            url = URL(string: "http://img.pokemondb.net/artwork/" + PDB.brokenLinks[name]! + ".jpg")
+        } else {
+            url = URL(string: self.imageUrl)
+        }
+
         if let i = url {
             let data = try? Data(contentsOf: i)
             if let x = data {
