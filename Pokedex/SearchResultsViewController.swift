@@ -158,6 +158,9 @@ extension SearchResultsViewController: UITableViewDataSource, UITableViewDelegat
 }
 
 extension SearchResultsViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 30, right: 0)
+    }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -175,7 +178,9 @@ extension SearchResultsViewController: UICollectionViewDataSource, UICollectionV
         }
         
         cell.awakeFromNib()
-        cell.pokemonImage.image = SearchResultsViewController.pokemonList[indexPath.row]?.getImage()
+        SearchResultsViewController.pokemonList[indexPath.row]?.getImage(withBlock: { img -> Void in
+            cell.pokemonImage.image = img
+        })
         
         //change size of image to make them uniform
         let hasAlpha = true

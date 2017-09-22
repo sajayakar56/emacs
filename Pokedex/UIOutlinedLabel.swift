@@ -10,7 +10,7 @@ import UIKit
 
 // from stackoverflow #1103148
 class UIOutlinedLabel: UILabel {
-    var outlineWidth: CGFloat = 3
+    var outlineWidth: CGFloat = 0
     var outlineColor: UIColor = UIColor.black
     
     override func drawText(in rect: CGRect) {

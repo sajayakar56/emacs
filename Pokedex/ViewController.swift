@@ -160,10 +160,11 @@ class ViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
+        layout.scrollDirection = UICollectionViewScrollDirection(rawValue: 1)!
         typesCollectionView = UICollectionView(frame: CGRect(x: view.frame.width * 0.1,
-                                                             y: view.frame.height * 0.15,
+                                                             y: view.frame.height * 0.35,
                                                              width: view.frame.width * 0.8,
-                                                             height: 200), collectionViewLayout: layout)
+                                                             height: 60), collectionViewLayout: layout)
         typesCollectionView.backgroundColor = UIColor.clear
         typesCollectionView.register(TypeCollectionViewCell.self, forCellWithReuseIdentifier: "typeCell")
         typesCollectionView.delegate = self

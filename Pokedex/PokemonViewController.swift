@@ -59,7 +59,9 @@ class PokemonViewController: UIViewController {
         
         // adding the pokemon image
         let pokemonImage = UIImageView(frame: CGRect(x: VFW * 0.15, y: VFH * 0.15, width: 125, height: 125))
-        pokemonImage.image = PokemonViewController.pokemon.getImage()
+        PokemonViewController.pokemon.getImage(withBlock: { img -> Void in
+            pokemonImage.image = img
+        })
         pokemonImage.contentMode = .scaleAspectFill
         view.addSubview(pokemonImage)
         

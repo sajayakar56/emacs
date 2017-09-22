@@ -16,14 +16,16 @@ class PokemonCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         
         pokemonImage = UIImageView(frame: CGRect(x: contentView.frame.width * 0.15, y: contentView.frame.height * 0.15, width: contentView.frame.width * 0.8, height: contentView.frame.height * 0.8))
-        pokemonImage.contentMode = .scaleAspectFill
+        pokemonImage.contentMode = .scaleAspectFit
+        pokemonImage.clipsToBounds = true
+        pokemonImage.image = UIImage(named: "placeholder")
         contentView.addSubview(pokemonImage)
         
-        pokemonName = UIOutlinedLabel(frame: CGRect(x: contentView.frame.width * 0.2, y: contentView.frame.height * 0.7, width: contentView.frame.width * 0.9, height: contentView.frame.height * 0.3))
+        pokemonName = UIOutlinedLabel(frame: CGRect(x: contentView.frame.width * 0.15, y: contentView.frame.height * 0.85, width: contentView.frame.width, height: contentView.frame.height * 0.3))
         pokemonName.lineBreakMode = .byWordWrapping
         pokemonName.numberOfLines = 3
-        pokemonName.font = pokemonName.font.withSize(13)
-        pokemonName.textColor = UIColor.white
+        pokemonName.font = pokemonName.font.withSize(9)
+        pokemonName.textColor = UIColor.black
         contentView.addSubview(pokemonName)
     }
     

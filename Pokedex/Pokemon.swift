@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Haneke
 
 class Pokemon {
     
@@ -56,27 +57,41 @@ class Pokemon {
     func toString() -> String {
         return name + " #" + String(number)
     }
-    
-    func getImage() -> UIImage {
-        // add check if URL would be invalid
+  
+    func getImage(withBlock: @escaping (UIImage) -> Void) {
         var url: URL?
         if PDB.brokenLinks.keys.contains(self.name) {
             url = URL(string: "http://img.pokemondb.net/artwork/" + PDB.brokenLinks[name]! + ".jpg")
         } else {
             url = URL(string: self.imageUrl)
         }
-
-        if let i = url {
-            let data = try? Data(contentsOf: i)
-            if let x = data {
-                return UIImage(data: x)!
-            } else {
-                return UIImage()
-            }
+        let cache = Shared.imageCache
+        if let imageUrl = url{
+            cache.fetch(URL: imageUrl).onSuccess({ img in
+                withBlock(img)})
         }
-        else {
-            return UIImage()
-        }
-        // can cause bugs, should add null check
     }
 }
+//    func getImage() -> UIImage {
+//        // add check if URL would be invalid
+//        var url: URL?
+//        if PDB.brokenLinks.keys.contains(self.name) {
+//            url = URL(string: "http://img.pokemondb.net/artwork/" + PDB.brokenLinks[name]! + ".jpg")
+//        } else {
+//            url = URL(string: self.imageUrl)
+//        }
+//
+//        if let i = url {
+//            let data = try? Data(contentsOf: i)
+//            if let x = data {
+//                return UIImage(data: x)!
+//            } else {
+//                return UIImage()
+//            }
+//        }
+//        else {
+//            return UIImage()
+//        }
+//        // can cause bugs, should add null check
+//    }
+
